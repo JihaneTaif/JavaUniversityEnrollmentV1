@@ -47,7 +47,9 @@ public class Main {
                     case 13: enrollmentUI.listCoursesByStudent(); break;
                     case 14: enrollmentUI.listStudentsByCourse(); break;
                     case 0: System.out.println("Goodbye!"); return;
+                    default:  System.out.println("invalid choice.try again");
                 }
+                pause(scanner);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,5 +72,11 @@ public class Main {
         System.out.println("13. List Courses by Student");
         System.out.println("14. List Students by Course");
         System.out.println("0. Exit");
+    }
+
+
+    private static void pause(Scanner scanner){
+        System.out.println("\n press enter to continue...");
+        scanner.nextLine();
     }
 }

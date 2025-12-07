@@ -21,9 +21,11 @@ public class CourseUI {
         String title = scanner.nextLine();
 
         courseService.addCourse(new Course(id, title));
+        System.out.println("course created successfully ::)");
     }
 
     public void listCourses() {
+
         courseService.getCourses().forEach(c ->
                 System.out.println(c.getId() + " - " + c.getTitle()) );
     }
@@ -43,5 +45,6 @@ public class CourseUI {
         System.out.print("Enter course Id: ");
         int id = scanner.nextInt();
         courseService.removeCourse(id);
+            System.out.println("course deleted successfully ::(");
     }
 }

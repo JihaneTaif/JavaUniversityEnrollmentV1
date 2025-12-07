@@ -22,6 +22,7 @@ public class StudentUI {
         System.out.print("Enter email: ");
         String email = scanner.nextLine();
         studentService.addStudent(new Student(id, name, email));
+        System.out.println("student created successfully::)");
     }
 
     public void listStudents() {
@@ -44,5 +45,6 @@ public class StudentUI {
         System.out.print("Enter student Id: ");
         int id = scanner.nextInt();
         studentService.removeStudent(id);
+        System.out.println("student deleted successfully ::(");
     }
 }
