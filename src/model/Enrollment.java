@@ -28,10 +28,10 @@ public class Enrollment {
 
     //getters & settes
     public int getStudentId(){   return studentId; }
-    public void setName(int name){  this.studentId = studentId;}
+    public void setStudentId(int studentId){  this.studentId = studentId;}
 
     //getters & settes
-    public int getCourse_id(){   return courseId; }
-    public void setCourse_id( int course_id){  this.courseId = courseId;}
+    public int getCourseId(){   return courseId; }
+    public void setCourseId( int course_id){  this.courseId = courseId;}
 }
 

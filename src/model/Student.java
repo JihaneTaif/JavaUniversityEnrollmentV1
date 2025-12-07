@@ -1,9 +1,9 @@
 package model;
 
 public class Student {
-    private int id;
-    private String name;
-    private String email;
+    private  int id;
+    private  String name;
+    private  String email;
 
     //Constructor
     public Student(int id, String name, String email){
@@ -15,15 +15,15 @@ public class Student {
 
 
     //getters & settes
-    public static int getId(){   return id; }
+    public  int getId(){   return id; }
     public void setId( int id){  this.id = id;}
 
     //getters & settes
-    public static String getName(){   return name; }
+    public  String getName(){   return name; }
     public void setName(String name){  this.name = name;}
 
     //getters & settes
-    public static String getEmail(){   return email; }
+    public  String getEmail(){   return email; }
     public void setEmail( String email){  this.email = email;}
 
 }

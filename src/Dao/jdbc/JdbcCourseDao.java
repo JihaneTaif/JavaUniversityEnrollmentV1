@@ -6,11 +6,11 @@ import model.Course;
 import java.sql.*;
 import java.util.*;
 
-public class jdbcCourseDao implements CourseDao {
+public class JdbcCourseDao implements CourseDao {
 
     private Connection connection;
 
-    public jdbcCourseDao(Connection connection){
+    public JdbcCourseDao(Connection connection){
         this.connection =  connection;
     }
 
@@ -48,14 +48,14 @@ public class jdbcCourseDao implements CourseDao {
         String sql = "SELECT * FROM courses";
         try(Statement stmt = connection.createStatement()){
             ResultSet res = stmt.executeQuery(sql);
-            if(res.next()){
+            while(res.next()){
                 courses.add(new Course(res.getInt("id"), res.getString("title")));
             }
 
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return null;
+        return courses;
     }
 
     @Override

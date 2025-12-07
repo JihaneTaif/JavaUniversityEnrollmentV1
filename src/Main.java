@@ -1,15 +1,74 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import service.StudentService;
+import service.CourseService;
+import service.EnrollmentService;
+import ui.StudentUI;
+import ui.CourseUI;
+import ui.EnrollmentUI;
+import util.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            Scanner scanner = new Scanner(System.in);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            // Create services
+            StudentService studentService = new StudentService(connection);
+            CourseService courseService = new CourseService(connection);
+            EnrollmentService enrollmentService = new EnrollmentService(connection);
+
+            // Create UI helpers
+            StudentUI studentUI = new StudentUI(studentService, scanner);
+            CourseUI courseUI = new CourseUI(courseService, scanner);
+            EnrollmentUI enrollmentUI = new EnrollmentUI(enrollmentService, scanner);
+
+            while (true) {
+                printMenu();
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (choice) {
+                    case 1: studentUI.addStudent(); break;
+                    case 2: studentUI.getStudent(); break;
+                    case 3: studentUI.listStudents(); break;
+                    case 4: studentUI.deleteStudent(); break;
+                    case 5: courseUI.addCourse(); break;
+                    case 6: courseUI.getCourse(); break;
+                    case 7: courseUI.listCourses(); break;
+                    case 8: courseUI.deleteCourse(); break;
+                    case 9: enrollmentUI.addEnrollment(); break;
+                    case 10: enrollmentUI.getEnrollment(); break;
+                    case 11: enrollmentUI.listEnrollments(); break;
+                    case 12: enrollmentUI.deleteEnrollment(); break;
+                    case 13: enrollmentUI.listCoursesByStudent(); break;
+                    case 14: enrollmentUI.listStudentsByCourse(); break;
+                    case 0: System.out.println("Goodbye!"); return;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    private static void printMenu() {
+        System.out.println("1. Add Student");
+        System.out.println("2. Get Student");
+        System.out.println("3. List Students");
+        System.out.println("4. Delete Student");
+        System.out.println("5. Add Course");
+        System.out.println("6. Get Course");
+        System.out.println("7. List Courses");
+        System.out.println("8. Delete Course");
+        System.out.println("9. Add Enrollment");
+        System.out.println("10. Get Enrollment");
+        System.out.println("11. List Enrollments");
+        System.out.println("12. Delete Enrollment");
+        System.out.println("13. List Courses by Student");
+        System.out.println("14. List Students by Course");
+        System.out.println("0. Exit");
     }
 }

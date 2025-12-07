@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface EnrollmentDao {
     void addEnrollment(Enrollment enrollment);
+    Enrollment getEnrollment(int id);
     List<Enrollment> getAllEnrollments();
     void deleteEnrollment(int id);
 

@@ -6,12 +6,12 @@ import model.Student;
 import java.sql.*;
 import java.util.*;
 
-public class jdbcStudentDao implements StudentDao {
+public class JdbcStudentDao implements StudentDao {
 
 
     private Connection connection;
 
-    public jdbcStudentDao(Connection connection){
+    public JdbcStudentDao(Connection connection){
         this.connection = connection;
     }
 
@@ -20,9 +20,9 @@ public class jdbcStudentDao implements StudentDao {
     public void addStudent(Student student){
         String sql = "INSERT INTO students (id, name, email) VALUES (? ,? ,?)";
         try( PreparedStatement stmt = connection.prepareStatement(sql)){
-            stmt.setInt(1,Student.getId());
-            stmt.setString(2, Student.getName());
-            stmt.setString(3, Student.getEmail());
+            stmt.setInt(1,student.getId());
+            stmt.setString(2, student.getName());
+            stmt.setString(3, student.getEmail());
             stmt.executeUpdate();
 
         }catch(SQLException exception){
@@ -52,10 +52,13 @@ public class jdbcStudentDao implements StudentDao {
          String sql = "SELECT * FROM students";
          try(Statement stmt = connection.createStatement()){
              ResultSet res = stmt.executeQuery(sql);
+             while(res.next()){
+                 students.add(new Student(res.getInt("id"), res.getString("name"),res.getString("email")) ) ;
+             }
          }catch( SQLException e){
              e.printStackTrace();
          }
-         return null;
+         return students;
     }
 
     @Override
